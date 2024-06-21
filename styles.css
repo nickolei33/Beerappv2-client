@@ -1,0 +1,83 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFCC02;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.beer-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.beer-item {
+    background-color: #333;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: calc(30% - 20px); /* 4 items per row */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+}
+
+.beer-item img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.beer-details {
+    display: flex ;
+    flex-direction: column;
+}
+
+.beer-details h2 {
+    margin: 0 0 10px;
+}
+
+.brewery-name {
+    font-size: 1em;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.beer-name {
+    font-size: 1em;;
+    color: yellow;
+    font-weight: bold;
+}
+
+.beer-type, .beer-abv {
+    margin: 5px 0;
+    font-size: 0.8em;
+}
+
+.beer-price {
+    margin: 5px 0;
+    font-size: 0.8em;
+}
+.logoblib {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;}
+
+
+
