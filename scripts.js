@@ -1,7 +1,7 @@
 // scripts.js
 document.addEventListener('DOMContentLoaded', () => {
     // Remplacez cette URL par l'URL réelle de votre API
-    const apiURL = 'http://nico-c.info/api/beers';
+    const apiURL = 'https://nico-c.info/api/beers';
 
     fetch(apiURL)
         .then(response => response.json())
