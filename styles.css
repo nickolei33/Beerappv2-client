@@ -102,7 +102,22 @@ body {
     margin-bottom: 1rem;
 }
 
-.beer-price, .beer-abv, .beer-ibu {
+.stand-number {
+    background-color: #FFCC02;
+    color: #000;
+    font-size: 5rem;
+    border-radius: 50%;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.beer-price-right, .beer-price-left, .beer-abv, .beer-ibu {
     font-size: 1rem;
     color: #FFCC02;
     text-align: center;
@@ -113,6 +128,16 @@ body {
     flex: 1; /* S'assure que les vignettes prennent toute la largeur disponible */
     max-width: 45%; /* S'assure que les vignettes ne dépassent pas une certaine largeur */
     text-align: center; /* Centrer le texte */
+    position: absolute;
+    bottom: 0;
+}
+
+.beer-abv, .beer-price-right{
+    right: 0;
+}
+
+.beer-ibu, .beer-price-left {
+    left: 0;
 }
 
 .beer-price-wrapper, .beer-abv-wrapper {
