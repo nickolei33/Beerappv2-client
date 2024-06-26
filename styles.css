@@ -33,7 +33,7 @@ body {
     cursor: pointer; /* Change le curseur pour indiquer la possibilité de cliquer */
     margin-bottom: 20px; /* Ajout d'une marge inférieure pour éviter le chevauchement vertical */
     position: relative; /* Assurez-vous que les éléments internes sont positionnés relativement à cet élément */
-    height: 350px; /* Ajustez cette valeur selon la hauteur de votre contenu */
+    height: 40rem; /* Ajustez cette valeur selon la hauteur de votre contenu */
 }
 
 .beer-item-inner {
@@ -54,13 +54,12 @@ body {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 8px;
-    padding: 20px;
+    padding: 2rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     box-sizing: border-box; /* Ajout pour inclure le padding dans la taille */
-    min-height: 300px;
 }
 
 .beer-item-front {
@@ -72,25 +71,70 @@ body {
     transform: rotateY(180deg);
 }
 
-.beer-logo, .brewery-logo {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
+.brewery-name {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
-.beer-logo img, .brewery-logo img {
+.beer-name {
+    font-size: 2rem;
+    color: #FFCC02;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.beer-logo, .brewery-logo, .img {
+    width: 80%;
+    height: auto;
+    max-height: 10rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.beer-type, .stand-number {
+    font-size: 1.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.beer-price, .beer-abv, .beer-ibu {
+    font-size: 1rem;
+    color: #FFCC02;
+    text-align: center;
+    background-color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    flex: 1; /* S'assure que les vignettes prennent toute la largeur disponible */
+    max-width: 45%; /* S'assure que les vignettes ne dépassent pas une certaine largeur */
+    text-align: center; /* Centrer le texte */
+}
+
+.beer-price-wrapper, .beer-abv-wrapper {
+    display: flex;
+    justify-content: space-between; /* Positionner les vignettes à gauche et à droite */
     width: 100%;
-    height: 100%;
-    border-radius: 50%;
 }
 
 .beer-details {
     width: 100%; /* S'assure que les détails occupent toute la largeur de la carte */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 
-.brewery-name, .beer-name, .beer-type, .beer-price, .beer-description, .beer-abv, .beer-ibu {
-    margin: 5px 0;
+.beer-description {
+    font-size: 1rem;
+    color: #fff;
     text-align: center;
+    margin-bottom: 1rem;
 }
 
 /* Media Queries */
