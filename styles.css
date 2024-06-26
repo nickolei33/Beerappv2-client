@@ -22,21 +22,22 @@ body {
 .beer-list {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px; /* Ajout d'un espace entre les éléments */
     justify-content: space-between;
 }
 
 .beer-item {
-    background-color: #333;
-    border-radius: 8px;
     margin: 10px;
-    width: calc(30% - 20px); /* 4 items per row */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: calc(30% - 20px); /* 3 items per row avec un espace entre eux */
     perspective: 1000px; /* Ajout pour l'effet de rotation */
     cursor: pointer; /* Change le curseur pour indiquer la possibilité de cliquer */
+    margin-bottom: 20px; /* Ajout d'une marge inférieure pour éviter le chevauchement vertical */
+    position: relative; /* Assurez-vous que les éléments internes sont positionnés relativement à cet élément */
+    height: 350px; /* Ajustez cette valeur selon la hauteur de votre contenu */
 }
 
 .beer-item-inner {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     transition: transform 0.6s;
