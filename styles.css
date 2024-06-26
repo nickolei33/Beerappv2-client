@@ -28,7 +28,7 @@ body {
 
 .beer-item {
     margin: 10px;
-    width: calc(30% - 20px); /* 3 items per row avec un espace entre eux */
+    width: calc(100% - 20px); /* Par défaut, 1 item par ligne */
     perspective: 1000px; /* Ajout pour l'effet de rotation */
     cursor: pointer; /* Change le curseur pour indiquer la possibilité de cliquer */
     margin-bottom: 20px; /* Ajout d'une marge inférieure pour éviter le chevauchement vertical */
@@ -91,4 +91,23 @@ body {
 .brewery-name, .beer-name, .beer-type, .beer-price, .beer-description, .beer-abv, .beer-ibu {
     margin: 5px 0;
     text-align: center;
+}
+
+/* Media Queries */
+@media (min-width: 1024px) {
+    .beer-item {
+        width: calc(30% - 20px); /* 3 items per row */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .beer-item {
+        width: calc(47% - 20px); /* 2 items per row */
+    }
+}
+
+@media (max-width: 767px) {
+    .beer-item {
+        width: calc(95% - 20px); /* 1 item per row */
+    }
 }
