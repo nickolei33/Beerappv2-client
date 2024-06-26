@@ -105,13 +105,13 @@ body {
 .stand-number {
     background-color: #FFCC02;
     color: #000;
-    font-size: 5rem;
+    font-size: 4rem;
     border-radius: 50%;
     padding: 0.5rem 1rem;
     text-align: center;
     margin-bottom: 1rem;
-    width: 10rem;
-    height: 10rem;
+    width: 6rem;
+    height: 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -124,20 +124,22 @@ body {
     background-color: #333;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    margin-bottom: 1rem;
     flex: 1; /* S'assure que les vignettes prennent toute la largeur disponible */
     max-width: 45%; /* S'assure que les vignettes ne dépassent pas une certaine largeur */
     text-align: center; /* Centrer le texte */
     position: absolute;
     bottom: 0;
+    border: solid white;
 }
 
 .beer-abv, .beer-price-right{
     right: 0;
+    border-radius: 0.5rem 0em 0em 0rem;
 }
 
 .beer-ibu, .beer-price-left {
     left: 0;
+    border-radius: 0rem 0.5em 0em 0rem;
 }
 
 .beer-price-wrapper, .beer-abv-wrapper {
