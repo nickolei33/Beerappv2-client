@@ -125,10 +125,7 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     flex: 1; /* S'assure que les vignettes prennent toute la largeur disponible */
-    max-width: 45%; /* S'assure que les vignettes ne dépassent pas une certaine largeur */
     text-align: center; /* Centrer le texte */
-    position: absolute;
-    bottom: 0;
     border: solid white;
 }
 
@@ -144,8 +141,11 @@ body {
 
 .beer-price-wrapper, .beer-abv-wrapper {
     display: flex;
+    flex-direction: row;
     justify-content: space-between; /* Positionner les vignettes à gauche et à droite */
     width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
 .beer-details {
