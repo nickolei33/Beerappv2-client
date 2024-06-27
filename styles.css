@@ -76,6 +76,7 @@ body {
     color: #fff;
     text-align: center;
     margin-bottom: 1rem;
+    min-height: 10%;
 }
 
 .beer-name {
@@ -86,7 +87,7 @@ body {
 }
 
 .beer-logo, .brewery-logo, .img {
-    width: 80%;
+    width: auto;
     height: auto;
     max-height: 10rem;
     margin-bottom: 1rem;
