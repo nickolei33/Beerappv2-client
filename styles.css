@@ -22,18 +22,18 @@ body {
 .beer-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Ajout d'un espace entre les éléments */
+    gap: 20px; 
     justify-content: space-between;
 }
 
 .beer-item {
     margin: 10px;
-    width: calc(100% - 20px); /* Par défaut, 1 item par ligne */
-    perspective: 1000px; /* Ajout pour l'effet de rotation */
-    cursor: pointer; /* Change le curseur pour indiquer la possibilité de cliquer */
-    margin-bottom: 20px; /* Ajout d'une marge inférieure pour éviter le chevauchement vertical */
-    position: relative; /* Assurez-vous que les éléments internes sont positionnés relativement à cet élément */
-    height: 40rem; /* Ajustez cette valeur selon la hauteur de votre contenu */
+    width: calc(100% - 20px);
+    perspective: 1000px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    position: relative; 
+    height: 40rem; 
 }
 
 .beer-item-inner {
@@ -59,15 +59,15 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    box-sizing: border-box; /* Ajout pour inclure le padding dans la taille */
+    box-sizing: border-box;
 }
 
 .beer-item-front {
-    background-color: #333; /* couleur de la face avant */
+    background-color: #333;
 }
 
 .beer-item-back {
-    background-color: #444; /* couleur différente pour le dos */
+    background-color: #444;
     transform: rotateY(180deg);
 }
 
@@ -126,8 +126,8 @@ body {
     background-color: #333;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    flex: 1; /* S'assure que les vignettes prennent toute la largeur disponible */
-    text-align: center; /* Centrer le texte */
+    flex: 1;
+    text-align: center;
     border: solid white;
 }
 

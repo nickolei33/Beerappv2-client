@@ -29,8 +29,8 @@ function displayBeers(beers) {
                         <div class="stand-number">${beer.brewery.stand_number}</div>
                         <div class="beer-details">
                             <div class="beer-price-wrapper">
-                                <div class="beer-price-left">${beer.price_12_5cl}€ (12.5cl)</div>
-                                <div class="beer-price-right">${beer.price_25cl}€ (25cl)</div>
+                                <div class="beer-price-left">🍷 : ${beer.price_12_5cl}€</div>
+                                <div class="beer-price-right">🍺 : ${beer.price_25cl}€</div>
                             </div>
                         </div>
                     </div>
