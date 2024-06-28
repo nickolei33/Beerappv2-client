@@ -90,6 +90,7 @@ body {
     width: auto;
     height: auto;
     max-height: 10rem;
+    max-width: 100%;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -150,12 +151,10 @@ body {
 }
 
 .beer-details {
-    width: 100%; /* S'assure que les détails occupent toute la largeur de la carte */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    flex-grow: 1;
 }
 
 .beer-description {
