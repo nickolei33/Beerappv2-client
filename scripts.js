@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function displayBeers(beers) {
     const beerList = document.getElementById('beer-list');
+    const domain = 'https://nico-c.info';
 
     beers.forEach(beer => {
         if (beer.availability === "1") {  // Check if availability is 1
