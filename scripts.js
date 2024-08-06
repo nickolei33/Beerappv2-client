@@ -20,9 +20,8 @@ function displayBeers(beers) {
             const beerItem = document.createElement('div');
             beerItem.classList.add('beer-item');
 
-            const beerImageUrl = beer.image_url.startsWith('http') ? beer.image_url : `${domain}${beer.image_url}`;
-            const breweryLogoUrl = beer.brewery.logo_url.startsWith('http') ? beer.brewery.logo_url : `${domain}${beer.brewery.logo_url}`;
-
+            const beerImageUrl = `${domain}${beer.image_url}`;
+            const breweryLogoUrl = `${domain}${beer.brewery.logo_url}`;
             
             beerItem.innerHTML = `
                 <div class="beer-item-inner">
