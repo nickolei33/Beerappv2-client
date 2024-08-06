@@ -28,7 +28,7 @@ function displayBeers(beers) {
                     <div class="beer-item-front">
                         <div class="brewery-name">${beer.brewery.name}</div>
                         <div class="beer-name">${beer.name}</div>
-                        <div><img class="beer-logo" src="${beer.image_url}" alt="Photo de ${beer.name}"></div>
+                        <div><img class="beer-logo" src="${beerImageUrl}" alt="Photo de ${beer.name}"></div>
                         <div class="beer-type">${beer.type}</div>
                         <div class="stand-number">${beer.brewery.stand_number}</div>
                         <div class="beer-details">
@@ -41,7 +41,7 @@ function displayBeers(beers) {
                     <div class="beer-item-back">
                         <div class="brewery-name">${beer.brewery.name}</div>
                         <div class="beer-name">${beer.name}</div>
-                        <div><img class='brewery-logo' src="${beer.brewery.logo_url}" alt="Logo de ${beer.brewery.name}"></div>
+                        <div><img class='brewery-logo' src="${breweryLogoUrl}" alt="Logo de ${beer.brewery.name}"></div>
                         <div class="beer-description">${beer.description}</div>
                         <div class="beer-details">
                             <div class="beer-abv-wrapper">
