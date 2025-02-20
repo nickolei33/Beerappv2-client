@@ -1,19 +1,14 @@
 // scripts.js
 document.addEventListener('DOMContentLoaded', () => {
-    const apiURL = 'https://nico-c.info/api/beers';
-
-    fetch(apiURL)
-        .then(response => response.json())
-        .then(data => {
-            const beers = data;
-            displayBeers(beers);
-        })
-        .catch(error => console.error('Erreur lors de la récupération des données :', error));
+    fetchAndDisplayBeers();
 });
 
 function displayBeers(beers) {
     const beerList = document.getElementById('beer-list');
     const domain = 'https://nico-c.info';
+    
+    // Nettoie la liste existante
+    beerList.innerHTML = '';
 
     beers.forEach(beer => {
         if (beer.availability === "1") {  // Check if availability is 1
@@ -60,4 +55,61 @@ function displayBeers(beers) {
             beerList.appendChild(beerItem);
         }
     });
+}
+
+// Fonction pour obtenir les types uniques de bières
+function getUniqueTypes(beers) {
+    // Ne prendre que les bières disponibles pour les types
+    const availableBeers = beers.filter(beer => beer.availability === "1");
+    return [...new Set(availableBeers.map(beer => beer.type))];
+}
+
+// Fonction pour remplir le sélecteur avec les types
+function populateTypeSelector(types) {
+    const selector = document.getElementById('beer-type');
+    // Vider d'abord le sélecteur sauf l'option "Toutes les bières"
+    selector.innerHTML = '<option value="all">Toutes les bières</option>';
+    
+    types.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        option.textContent = type;
+        selector.appendChild(option);
+    });
+}
+
+// Fonction pour filtrer les bières
+function filterBeersByType(beers, selectedType) {
+    const availableBeers = beers.filter(beer => beer.availability === "1");
+    if (selectedType === 'all') {
+        return availableBeers;
+    }
+    return availableBeers.filter(beer => beer.type === selectedType);
+}
+
+// Modification de votre fonction fetch existante
+async function fetchAndDisplayBeers() {
+    try {
+        const response = await fetch('https://nico-c.info/api/beers');
+        const beers = await response.json();
+        
+        // Stocke les bières globalement pour le filtrage
+        window.allBeers = beers;
+        
+        // Obtient et affiche les types uniques dans le sélecteur
+        const uniqueTypes = getUniqueTypes(beers);
+        populateTypeSelector(uniqueTypes);
+        
+        // Affiche toutes les bières initialement
+        displayBeers(filterBeersByType(beers, 'all'));
+        
+        // Ajoute l'écouteur d'événements pour le filtrage
+        document.getElementById('beer-type').addEventListener('change', (e) => {
+            const filteredBeers = filterBeersByType(window.allBeers, e.target.value);
+            displayBeers(filteredBeers);
+        });
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des bières:', error);
+    }
 }
