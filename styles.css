@@ -1,184 +1,194 @@
 /* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #FFCC02;
-    color: #fff;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffcc02;
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px 0;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
 .header {
-    text-align: center;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .beer-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .beer-item {
-    margin: 10px;
-    width: calc(100% - 20px);
-    perspective: 1000px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    position: relative; 
-    height: 40rem; 
+  margin: 10px;
+  width: calc(100% - 20px);
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  position: relative;
+  height: 40rem;
 }
 
 .beer-item-inner {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
 }
 
 .beer-item.flip .beer-item-inner {
-    transform: rotateY(180deg);
+  transform: rotateY(180deg);
 }
 
-.beer-item-front, .beer-item-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
-    padding: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    box-sizing: border-box;
+.beer-item-front,
+.beer-item-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .beer-item-front {
-    background-color: #333;
+  background-color: #333;
 }
 
 .beer-item-back {
-    background-color: #444;
-    transform: rotateY(180deg);
+  background-color: #444;
+  transform: rotateY(180deg);
 }
 
 .brewery-name {
-    font-size: 1.5rem;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 1rem;
-    min-height: 10%;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
+  min-height: 10%;
 }
 
 .beer-name {
-    font-size: 2rem;
-    color: #FFCC02;
-    text-align: center;
-    margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #ffcc02;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.beer-logo, .brewery-logo, .img {
-    width: auto;
-    height: auto;
-    max-height: 10rem;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+.beer-logo,
+.brewery-logo,
+.img {
+  width: auto;
+  height: auto;
+  max-height: 10rem;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
-.beer-type, .stand-number {
-    font-size: 1.5rem;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 1rem;
+.beer-type,
+.stand-number {
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .stand-number {
-    background-color: #FFCC02;
-    color: #000;
-    font-size: 4rem;
-    border-radius: 50%;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    width: 6rem;
-    height: 6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: #ffcc02;
+  color: #000;
+  font-size: 4rem;
+  border-radius: 50%;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.beer-price-right, .beer-price-left, .beer-abv, .beer-ibu {
-    font-size: 1rem;
-    color: #FFCC02;
-    text-align: center;
-    background-color: #333;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    flex: 1;
-    text-align: center;
-    border: solid white;
+.beer-price-right,
+.beer-price-left,
+.beer-abv,
+.beer-ibu {
+  font-size: 1rem;
+  color: #ffcc02;
+  text-align: center;
+  background-color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  flex: 1;
+  text-align: center;
+  border: solid white;
 }
 
-.beer-abv, .beer-price-right{
-    right: 0;
-    border-radius: 0.5rem 0em 0em 0rem;
+.beer-abv,
+.beer-price-left {
+  right: 0;
+  border-radius: 0.5rem 0em 0em 0rem;
 }
 
-.beer-ibu, .beer-price-left {
-    left: 0;
-    border-radius: 0rem 0.5em 0em 0rem;
+.beer-ibu,
+.beer-price-right {
+  left: 0;
+  border-radius: 0rem 0.5em 0em 0rem;
 }
 
-.beer-price-wrapper, .beer-abv-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Positionner les vignettes à gauche et à droite */
-    width: 100%;
-    position: absolute;
-    bottom: 0;
+.beer-price-wrapper,
+.beer-abv-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; /* Positionner les vignettes à gauche et à droite */
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .beer-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .beer-description {
-    font-size: 1rem;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 /* Media Queries */
 @media (min-width: 1024px) {
-    .beer-item {
-        width: calc(30% - 20px); /* 3 items per row */
-    }
+  .beer-item {
+    width: calc(30% - 20px); /* 3 items per row */
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-    .beer-item {
-        width: calc(47% - 20px); /* 2 items per row */
-    }
+  .beer-item {
+    width: calc(47% - 20px); /* 2 items per row */
+  }
 }
 
 @media (max-width: 767px) {
-    .beer-item {
-        width: calc(95% - 20px); /* 1 item per row */
-    }
+  .beer-item {
+    width: calc(95% - 20px); /* 1 item per row */
+  }
 }
