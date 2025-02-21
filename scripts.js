@@ -61,7 +61,8 @@ function displayBeers(beers) {
 function getUniqueTypes(beers) {
     // Ne prendre que les bières disponibles pour les types
     const availableBeers = beers.filter(beer => beer.availability === "1");
-    return [...new Set(availableBeers.map(beer => beer.type))];
+    // Récupérer les types uniques et les trier par ordre alphabétique
+    return [...new Set(availableBeers.map(beer => beer.type))].sort();
 }
 
 // Fonction pour remplir le sélecteur avec les types
