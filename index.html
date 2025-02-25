@@ -67,11 +67,10 @@
             <button class="search-icon"><i class="fas fa-search"></i></button>
           </div>
           <div class="select-container">
-            <label for="beer-type">Filtrer par type :</label>
-            <select id="beer-type" class="beer-filter">
-              <option value="all">Toutes les bières</option>
-              <!-- Les autres options seront ajoutées dynamiquement via JavaScript -->
-            </select>
+            <button id="type-filter-button" class="filter-button">
+              <i class="fas fa-filter"></i> Filtrer par type
+              <span id="selected-count" class="selected-count"></span>
+            </button>
           </div>
         </div>
       </header>
@@ -82,6 +81,27 @@
         </section>
         <section id="beer-list" class="beer-list"></section>
       </main>
+
+      <!-- Modal pour la sélection multiple -->
+      <div id="filter-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Sélectionner les types de bière</h2>
+            <span class="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div id="type-checkboxes" class="checkbox-container"></div>
+          </div>
+          <div class="modal-footer">
+            <button id="clear-filters" class="modal-button clear-button">
+              Tout effacer
+            </button>
+            <button id="apply-filters" class="modal-button apply-button">
+              Appliquer
+            </button>
+          </div>
+        </div>
+      </div>
 
       <footer class="site-footer">
         <p>© 2025 Festival des Bières de Bordeaux</p>

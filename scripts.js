@@ -1,7 +1,14 @@
 // Enhanced scripts.js
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayBeers();
+  setupModalEvents();
 });
+
+// Variables globales pour stocker l'état des filtres
+const filterState = {
+  selectedTypes: [],
+  searchTerm: "",
+};
 
 // Function to create elements with animation delays
 function createBeerElement(beer, index) {
@@ -117,109 +124,174 @@ function getUniqueTypes(beers) {
   return [...new Set(beers.map((beer) => beer.type))].sort();
 }
 
-function populateTypeSelector(types) {
-  const selector = document.getElementById("beer-type");
-  // Clear selector except "All beers" option
-  selector.innerHTML = '<option value="all">Toutes les bières</option>';
+// Fonction pour créer les checkboxes de types de bière
+function createTypeCheckboxes(types) {
+  const checkboxContainer = document.getElementById("type-checkboxes");
+  checkboxContainer.innerHTML = "";
 
   types.forEach((type) => {
-    const option = document.createElement("option");
-    option.value = type;
-    option.textContent = type;
-    selector.appendChild(option);
+    const checkboxItem = document.createElement("div");
+    checkboxItem.classList.add("checkbox-item");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = `type-${type.replace(/\s+/g, "-").toLowerCase()}`;
+    checkbox.value = type;
+
+    // Pré-cocher les cases si le type est dans les types sélectionnés
+    if (filterState.selectedTypes.includes(type)) {
+      checkbox.checked = true;
+    }
+
+    const label = document.createElement("label");
+    label.htmlFor = checkbox.id;
+    label.textContent = type;
+
+    checkboxItem.appendChild(checkbox);
+    checkboxItem.appendChild(label);
+    checkboxContainer.appendChild(checkboxItem);
   });
 }
 
-function filterBeersByType(beers, selectedType) {
-  if (selectedType === "all") {
-    return beers;
+function setupModalEvents() {
+  const modal = document.getElementById("filter-modal");
+  const filterButton = document.getElementById("type-filter-button");
+  const closeModal = document.querySelector(".close-modal");
+  const applyButton = document.getElementById("apply-filters");
+  const clearButton = document.getElementById("clear-filters");
+
+  // Ouvrir le modal quand on clique sur le bouton de filtre
+  filterButton.addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+
+  // Fermer le modal quand on clique sur la croix
+  closeModal.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Fermer le modal quand on clique en dehors
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Appliquer les filtres
+  applyButton.addEventListener("click", () => {
+    // Récupérer tous les checkboxes cochés
+    const checkedTypes = Array.from(
+      document.querySelectorAll(
+        "#type-checkboxes input[type='checkbox']:checked"
+      )
+    ).map((checkbox) => checkbox.value);
+
+    // Mettre à jour l'état des filtres
+    filterState.selectedTypes = checkedTypes;
+
+    // Mettre à jour le compteur de sélection
+    updateSelectedCount();
+
+    // Filtrer et afficher les bières
+    filterAndDisplayBeers();
+
+    // Fermer le modal
+    modal.style.display = "none";
+  });
+
+  // Effacer tous les filtres
+  clearButton.addEventListener("click", () => {
+    // Décocher toutes les cases
+    document
+      .querySelectorAll("#type-checkboxes input[type='checkbox']")
+      .forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+
+    // Réinitialiser l'état des filtres de type
+    filterState.selectedTypes = [];
+
+    // Mettre à jour le compteur
+    updateSelectedCount();
+  });
+
+  // Configurer la recherche
+  setupSearch();
+}
+
+function updateSelectedCount() {
+  const selectedCount = document.getElementById("selected-count");
+  if (filterState.selectedTypes.length > 0) {
+    selectedCount.textContent = filterState.selectedTypes.length;
+    selectedCount.style.display = "inline-flex";
+  } else {
+    selectedCount.style.display = "none";
   }
-  return beers.filter((beer) => beer.type === selectedType);
 }
 
-function filterBeersBySearchTerm(beers, searchTerm) {
-  if (!searchTerm) return beers;
+function setupSearch() {
+  const searchInput = document.getElementById("beer-search");
 
-  const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-
-  return beers.filter((beer) => {
-    return (
-      beer.name.toLowerCase().includes(normalizedSearchTerm) ||
-      beer.brewery.name.toLowerCase().includes(normalizedSearchTerm) ||
-      beer.type.toLowerCase().includes(normalizedSearchTerm) ||
-      (beer.description &&
-        beer.description.toLowerCase().includes(normalizedSearchTerm))
-    );
+  searchInput.addEventListener("input", (e) => {
+    filterState.searchTerm = e.target.value.toLowerCase().trim();
+    filterAndDisplayBeers();
   });
-}
-
-function applyAllFilters() {
-  const typeFilter = document.getElementById("beer-type").value;
-  const searchTerm = document.getElementById("beer-search").value;
-
-  let filteredBeers = window.allBeers.filter(
-    (beer) => beer.availability === "1"
-  );
-
-  // Apply type filter
-  filteredBeers = filterBeersByType(filteredBeers, typeFilter);
-
-  // Apply search filter
-  filteredBeers = filterBeersBySearchTerm(filteredBeers, searchTerm);
-
-  // Display filtered beers
-  displayBeers(filteredBeers);
 }
 
 async function fetchAndDisplayBeers() {
   try {
     const response = await fetch("https://nico-c.info/api/beers");
-
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error("Impossible de récupérer les données");
     }
 
     const beers = await response.json();
 
-    // Store all available beers globally
-    window.allBeers = beers.filter((beer) => beer.availability === "1");
+    // Stocker les bières dans une variable globale pour filtrage ultérieur
+    window.allBeers = beers;
 
-    // Get unique types and populate selector
-    const uniqueTypes = getUniqueTypes(window.allBeers);
-    populateTypeSelector(uniqueTypes);
+    // Créer les checkboxes pour les types de bière
+    const types = getUniqueTypes(beers);
+    createTypeCheckboxes(types);
 
-    // Display all beers initially
-    displayBeers(window.allBeers);
+    // Afficher toutes les bières au départ
+    displayBeers(beers);
 
-    // Add event listeners for filtering
-    document
-      .getElementById("beer-type")
-      .addEventListener("change", applyAllFilters);
-
-    // Add search functionality
-    const searchInput = document.getElementById("beer-search");
-
-    // Add real-time filtering as user types
-    searchInput.addEventListener("input", applyAllFilters);
-
-    // Add search button click functionality
-    document
-      .querySelector(".search-icon")
-      .addEventListener("click", applyAllFilters);
-
-    // Add enter key functionality to search
-    searchInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        applyAllFilters();
-      }
-    });
+    // Initialiser le compteur de bières
+    document.getElementById("beer-count-number").textContent = beers.length;
   } catch (error) {
     console.error("Erreur lors du chargement des bières:", error);
     document.getElementById("beer-list").innerHTML = `
-            <div class="error-message">
-                <p>Impossible de charger les bières. Veuillez réessayer plus tard.</p>
-                <p>Erreur: ${error.message}</p>
-            </div>
-        `;
+      <div class="error-message">
+        <p>Une erreur est survenue lors du chargement des bières. Veuillez réessayer plus tard.</p>
+      </div>
+    `;
   }
+}
+
+function filterAndDisplayBeers() {
+  if (!window.allBeers) return;
+
+  let filteredBeers = window.allBeers;
+
+  // Filtrer par terme de recherche
+  if (filterState.searchTerm) {
+    filteredBeers = filteredBeers.filter((beer) => {
+      return (
+        beer.name.toLowerCase().includes(filterState.searchTerm) ||
+        beer.brewery.name.toLowerCase().includes(filterState.searchTerm) ||
+        beer.type.toLowerCase().includes(filterState.searchTerm)
+      );
+    });
+  }
+
+  // Filtrer par types sélectionnés
+  if (filterState.selectedTypes.length > 0) {
+    filteredBeers = filteredBeers.filter((beer) => {
+      return filterState.selectedTypes.includes(beer.type);
+    });
+  }
+
+  // Afficher les bières filtrées
+  displayBeers(filteredBeers);
 }
