@@ -28,46 +28,46 @@ function createBeerElement(beer, index) {
   );
 
   beerItem.innerHTML = `
-        <div class="beer-item-inner">
-            <div class="beer-item-front">
-                <div class="brewery-name">${beer.brewery.name}</div>
-                <div class="beer-name">${beer.name}</div>
-                <div><img class="beer-logo" src="${beerImageUrl}" alt="Photo de ${
+          <div class="beer-item-inner">
+              <div class="beer-item-front">
+                  <div class="brewery-name">${beer.brewery.name}</div>
+                  <div class="beer-name">${beer.name}</div>
+                  <div><img class="beer-logo" src="${beerImageUrl}" alt="Photo de ${
     beer.name
   }"></div>
-                <div class="beer-type">${beer.type}</div>
-                <div class="stand-number">${beer.brewery.stand_number}</div>
-                <div class="beer-details">
-                    <div class="beer-price-wrapper">
-                        <div class="beer-price-left">🍷 : ${
-                          beer.price_12_5cl
-                        }€</div>
-                        <div class="beer-price-right">🍺 : ${
-                          beer.price_25cl
-                        }€</div>
-                    </div>
-                </div>
-                <div class="click-indicator"><i class="fas fa-sync-alt"></i></div>
-            </div>
-            <div class="beer-item-back">
-                <div class="brewery-name">${beer.brewery.name}</div>
-                <div class="beer-name">${beer.name}</div>
-                <div><img class='brewery-logo' src="${breweryLogoUrl}" alt="Logo de ${
+                  <div class="beer-type">${beer.type}</div>
+                  <div class="stand-number">${beer.brewery.stand_number}</div>
+                  <div class="beer-details">
+                      <div class="beer-price-wrapper">
+                          <div class="beer-price-left">🍷 : ${
+                            beer.price_12_5cl
+                          }€</div>
+                          <div class="beer-price-right">🍺 : ${
+                            beer.price_25cl
+                          }€</div>
+                      </div>
+                  </div>
+                  <div class="click-indicator"><i class="fas fa-sync-alt"></i></div>
+              </div>
+              <div class="beer-item-back">
+                  <div class="brewery-name">${beer.brewery.name}</div>
+                  <div class="beer-name">${beer.name}</div>
+                  <div><img class='brewery-logo' src="${breweryLogoUrl}" alt="Logo de ${
     beer.brewery.name
   }"></div>
-                <div class="beer-description">${truncatedDescription}</div>
-                <div class="beer-details">
-                    <div class="beer-abv-wrapper">
-                        <div class="beer-abv">ABV: ${
-                          beer.alcohol_percentage
-                        }%</div>
-                        <div class="beer-ibu">IBU: ${beer.ibu || "N/A"}</div>
-                    </div>
-                </div>
-                <div class="click-indicator"><i class="fas fa-sync-alt"></i></div>
-            </div>
-        </div>
-    `;
+                  <div class="beer-description">${truncatedDescription}</div>
+                  <div class="beer-details">
+                      <div class="beer-abv-wrapper">
+                          <div class="beer-abv">ABV: ${
+                            beer.alcohol_percentage
+                          }%</div>
+                          <div class="beer-ibu">IBU: ${beer.ibu || "N/A"}</div>
+                      </div>
+                  </div>
+                  <div class="click-indicator"><i class="fas fa-sync-alt"></i></div>
+              </div>
+          </div>
+      `;
 
   // Add flip animation
   beerItem.addEventListener("click", () => {
@@ -245,27 +245,31 @@ async function fetchAndDisplayBeers() {
       throw new Error("Impossible de récupérer les données");
     }
 
-    const beers = await response.json();
+    const allBeers = await response.json();
 
-    // Stocker les bières dans une variable globale pour filtrage ultérieur
-    window.allBeers = beers;
+    // Filtrer pour ne garder que les bières disponibles (availability à "1")
+    const availableBeers = allBeers.filter((beer) => beer.availability === "1");
+
+    // Stocker les bières disponibles dans une variable globale pour filtrage ultérieur
+    window.allBeers = availableBeers;
 
     // Créer les checkboxes pour les types de bière
-    const types = getUniqueTypes(beers);
+    const types = getUniqueTypes(availableBeers);
     createTypeCheckboxes(types);
 
-    // Afficher toutes les bières au départ
-    displayBeers(beers);
+    // Afficher les bières disponibles
+    displayBeers(availableBeers);
 
     // Initialiser le compteur de bières
-    document.getElementById("beer-count-number").textContent = beers.length;
+    document.getElementById("beer-count-number").textContent =
+      availableBeers.length;
   } catch (error) {
     console.error("Erreur lors du chargement des bières:", error);
     document.getElementById("beer-list").innerHTML = `
-      <div class="error-message">
-        <p>Une erreur est survenue lors du chargement des bières. Veuillez réessayer plus tard.</p>
-      </div>
-    `;
+        <div class="error-message">
+          <p>Une erreur est survenue lors du chargement des bières. Veuillez réessayer plus tard.</p>
+        </div>
+      `;
   }
 }
 
